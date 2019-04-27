@@ -1,0 +1,85 @@
+
+2019-03-11 12:00:50
+[ERROR]-[Thread: XNIO-4 I/O-3]-[org.xnio.nio.WorkerThread.safeRun()]: XNIO000011: Task io.undertow.server.session.InMemorySessionManager$SessionImpl$2@ba4a983 failed with an exception
+java.util.concurrent.RejectedExecutionException: Task io.undertow.server.session.InMemorySessionManager$SessionImpl$2$1@4e6798e8 rejected from org.xnio.XnioWorker$TaskPool@1908cfaa[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 4]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.reject(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.execute(Unknown Source)
+	at org.xnio.XnioWorker.execute(XnioWorker.java:749)
+	at io.undertow.server.session.InMemorySessionManager$SessionImpl$2.run(InMemorySessionManager.java:388)
+	at org.xnio.nio.WorkerThread.safeRun(WorkerThread.java:582)
+	at org.xnio.nio.WorkerThread.run(WorkerThread.java:466)
+
+2019-03-11 12:00:50
+[ERROR]-[Thread: XNIO-4 I/O-3]-[org.xnio.nio.WorkerThread.safeRun()]: XNIO000011: Task io.undertow.server.session.InMemorySessionManager$SessionImpl$2@7667c0e8 failed with an exception
+java.util.concurrent.RejectedExecutionException: Task io.undertow.server.session.InMemorySessionManager$SessionImpl$2$1@294d3ff4 rejected from org.xnio.XnioWorker$TaskPool@1908cfaa[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 4]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.reject(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.execute(Unknown Source)
+	at org.xnio.XnioWorker.execute(XnioWorker.java:749)
+	at io.undertow.server.session.InMemorySessionManager$SessionImpl$2.run(InMemorySessionManager.java:388)
+	at org.xnio.nio.WorkerThread.safeRun(WorkerThread.java:582)
+	at org.xnio.nio.WorkerThread.run(WorkerThread.java:466)
+
+2019-03-11 12:00:50
+[ERROR]-[Thread: XNIO-4 I/O-3]-[org.xnio.nio.WorkerThread.safeRun()]: XNIO000011: Task io.undertow.server.session.InMemorySessionManager$SessionImpl$2@3908b095 failed with an exception
+java.util.concurrent.RejectedExecutionException: Task io.undertow.server.session.InMemorySessionManager$SessionImpl$2$1@797a92d1 rejected from org.xnio.XnioWorker$TaskPool@1908cfaa[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 4]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.reject(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.execute(Unknown Source)
+	at org.xnio.XnioWorker.execute(XnioWorker.java:749)
+	at io.undertow.server.session.InMemorySessionManager$SessionImpl$2.run(InMemorySessionManager.java:388)
+	at org.xnio.nio.WorkerThread.safeRun(WorkerThread.java:582)
+	at org.xnio.nio.WorkerThread.run(WorkerThread.java:466)
+
+2019-03-11 12:00:50
+[ERROR]-[Thread: XNIO-4 I/O-3]-[org.xnio.nio.WorkerThread.safeRun()]: XNIO000011: Task io.undertow.server.session.InMemorySessionManager$SessionImpl$2@25c1aea0 failed with an exception
+java.util.concurrent.RejectedExecutionException: Task io.undertow.server.session.InMemorySessionManager$SessionImpl$2$1@4d28db47 rejected from org.xnio.XnioWorker$TaskPool@1908cfaa[Terminated, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 4]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.reject(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.execute(Unknown Source)
+	at org.xnio.XnioWorker.execute(XnioWorker.java:749)
+	at io.undertow.server.session.InMemorySessionManager$SessionImpl$2.run(InMemorySessionManager.java:388)
+	at org.xnio.nio.WorkerThread.safeRun(WorkerThread.java:582)
+	at org.xnio.nio.WorkerThread.run(WorkerThread.java:466)
+
+2019-03-11 15:37:19
+[ERROR]-[Thread: XNIO-21 task-1]-[com.jfinal.core.ActionHandler.handle()]: /user/test
+java.lang.RuntimeException: File not found : D:/graduation project/BackEnd/jfinal_demo_for_maven/src/main/webapp/user/test.html
+	at com.jfinal.template.source.FileSource.getContent(FileSource.java:70)
+	at com.jfinal.template.Engine.buildTemplateBySourceFactory(Engine.java:159)
+	at com.jfinal.template.Engine.getTemplate(Engine.java:144)
+	at com.jfinal.render.TemplateRender.render(TemplateRender.java:61)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:106)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:89)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at io.undertow.servlet.handlers.FilterHandler.handleRequest(FilterHandler.java:84)
+	at io.undertow.servlet.handlers.security.ServletSecurityRoleHandler.handleRequest(ServletSecurityRoleHandler.java:62)
+	at io.undertow.servlet.handlers.ServletChain$1.handleRequest(ServletChain.java:68)
+	at io.undertow.servlet.handlers.ServletDispatchingHandler.handleRequest(ServletDispatchingHandler.java:36)
+	at io.undertow.servlet.handlers.security.SSLInformationAssociationHandler.handleRequest(SSLInformationAssociationHandler.java:132)
+	at io.undertow.servlet.handlers.security.ServletAuthenticationCallHandler.handleRequest(ServletAuthenticationCallHandler.java:57)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.security.handlers.AbstractConfidentialityHandler.handleRequest(AbstractConfidentialityHandler.java:46)
+	at io.undertow.servlet.handlers.security.ServletConfidentialityConstraintHandler.handleRequest(ServletConfidentialityConstraintHandler.java:64)
+	at io.undertow.security.handlers.AuthenticationMechanismsHandler.handleRequest(AuthenticationMechanismsHandler.java:60)
+	at io.undertow.servlet.handlers.security.CachedAuthenticatedSessionHandler.handleRequest(CachedAuthenticatedSessionHandler.java:77)
+	at io.undertow.security.handlers.AbstractSecurityContextAssociationHandler.handleRequest(AbstractSecurityContextAssociationHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.SessionRestoringHandler.handleRequest(SessionRestoringHandler.java:119)
+	at io.undertow.servlet.handlers.ServletInitialHandler.handleFirstRequest(ServletInitialHandler.java:292)
+	at io.undertow.servlet.handlers.ServletInitialHandler.access$100(ServletInitialHandler.java:81)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:138)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:135)
+	at io.undertow.servlet.core.ServletRequestContextThreadSetupAction$1.call(ServletRequestContextThreadSetupAction.java:48)
+	at io.undertow.servlet.core.ContextClassLoaderSetupAction$1.call(ContextClassLoaderSetupAction.java:43)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:272)
+	at io.undertow.servlet.handlers.ServletInitialHandler.access$000(ServletInitialHandler.java:81)
+	at io.undertow.servlet.handlers.ServletInitialHandler$1.handleRequest(ServletInitialHandler.java:104)
+	at io.undertow.server.Connectors.executeRootHandler(Connectors.java:364)
+	at io.undertow.server.HttpServerExchange$1.run(HttpServerExchange.java:830)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
