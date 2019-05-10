@@ -14,8 +14,8 @@ public class AuthInterceptor implements Interceptor{
 	public void intercept(Invocation inv) {
 		Controller controller = inv.getController();
 		if (controller.getRequest().getMethod()=="OPTIONS"){//OPTIONS统一返回
-			inv.invoke();
 			HashMap<String, Object> res = new HashMap<>();
+			System.out.println("OPTIONS拦截");
 			res.put("msg", "hello!");
 			controller.renderJson(res);
 		}else{//OPTIONS不做拦截
@@ -39,11 +39,12 @@ public class AuthInterceptor implements Interceptor{
 					controller.renderJson(res);
 				}else {
 					controller.setAttr("username", username);//传参给controller
+					inv.invoke();
 				}
 			}
 			
+			
 		}
-		inv.invoke();
 		
 	}
 

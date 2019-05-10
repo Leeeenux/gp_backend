@@ -38,7 +38,7 @@ public class FaceController extends Controller {
 	@Before(SignInInterceptor.class)
 	public void signin() {
 		String base64 = getPara("base64");
-		String studentId = getPara("studentid");
+		String studentId = getPara("studentId");
 		String latitude = getPara("latitude");
 		String longitude = getPara("longitude");
 		HashMap<String, Object> res = new HashMap<>();
@@ -47,7 +47,7 @@ public class FaceController extends Controller {
 		Point2D ClassPoint = new Point2D.Double(117.51759338378906,23.73352813720703);
 		LocationUtil locationUtil = new LocationUtil();
 		Double distance = locationUtil.getDistance(StudentPoint, ClassPoint);
-		if (distance>20) {
+		if (distance>20000) {
 			res.put("success", false);
 			res.put("msg", "请在教室里签到");
 			renderJson(res);
@@ -56,9 +56,16 @@ public class FaceController extends Controller {
 			boolean IsMatch = (boolean) verifyResult.get("IsMatch");
 			if (verifyResult.get("RequestId")!=null) {//有识别到人脸
 				if (IsMatch) {
-					res.put("success", true);
-					res.put("score",verifyResult.get("Score"));
-					res.put("msg", "人脸匹配成功");
+					if (sign(studentId)) {//签到成功
+						res.put("success", true);
+						res.put("score",verifyResult.get("Score"));
+						res.put("msg", "人脸匹配成功");
+					}else {
+						res.put("success", false);
+						res.put("score",verifyResult.get("Score"));
+						res.put("msg", "未知错误请重试");
+					}
+					
 				}else {
 					res.put("success", false);
 					res.put("score",verifyResult.get("Score"));
@@ -72,24 +79,18 @@ public class FaceController extends Controller {
 			renderJson(res);
 		}
 	}
-	private void sign() {
+	private boolean sign(String studentId) {
 		Attendance atd = new Attendance();
-		String LastAtdId = atd.findLastAtendanceId("1001").getStr("attendanceId");
-		boolean IsAllow = atd.IsAllow("101").getBoolean("allow");
+		String LastAtdId = atd.findLastAtendanceId(studentId).getStr("attendanceId");//获取考勤id
 		System.out.println(atd.IsAllow("101").getBoolean("allow"));
-		if (IsAllow) {
-			HashMap<String, Object> params = new HashMap<>();
-			Date currentTime = new Date();
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String current = sdf.format(currentTime);
-			params.put("attendanceId", LastAtdId);
-			params.put("signInStatus", "准点");
-			params.put("signInTime", current);
-			atd._setAttrs(params);
-			atd.update();
-			renderJson("msg","签到成功");
-		}else {
-			renderJson("msg","还未开放签到");
-		}
+		HashMap<String, Object> params = new HashMap<>();
+		Date currentTime = new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String current = sdf.format(currentTime);
+		params.put("attendanceId", LastAtdId);
+		params.put("signInStatus", "准点");
+		params.put("signInTime", current);
+		atd._setAttrs(params);
+		return atd.update();
 	}
 }

@@ -21,6 +21,7 @@ public class _MappingKit {
 		arp.addMapping("relation", "rid", Relation.class);
 		arp.addMapping("student", "sid", Student.class);
 		arp.addMapping("gp_attendance","attendanceId",Attendance.class);
+		arp.addMapping("gp_student_copy","studentId",Student2.class);
 	}
 }
 

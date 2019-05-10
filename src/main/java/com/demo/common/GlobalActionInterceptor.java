@@ -14,6 +14,7 @@ public class GlobalActionInterceptor implements Interceptor{
 		Controller controller = inv.getController();
 		controller.getResponse().addHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8080");
 		controller.getResponse().addHeader("Access-Control-Allow-Headers", "X-Requested-With");
+		controller.getResponse().addHeader("Access-Control-Allow-Headers", "content-type");
 		controller.getResponse().addHeader("Access-Control-Allow-Headers", "token");
 		controller.getResponse().addHeader("Access-Control-Allow-Credentials","true");
 		

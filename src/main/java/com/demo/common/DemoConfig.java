@@ -59,6 +59,7 @@ public class DemoConfig extends JFinalConfig {
 		
 		// 支持 Controller、Interceptor 之中使用 @Inject 注入业务层，并且自动实现 AOP
 		me.setInjectDependency(true);
+		me.setEncoding("UTF-8");
 	}
 	
 	/**
