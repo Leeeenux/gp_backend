@@ -4,6 +4,11 @@ import com.demo.admin.ApiController;
 import com.demo.admin.AtdController;
 import com.demo.admin.ClassController;
 import com.demo.admin.FaceController;
+import com.demo.admin.LeaveController;
+import com.demo.admin.NoticeController;
+import com.demo.admin.PersonController;
+import com.demo.admin.StudentController;
+import com.demo.admin.TeacherController;
 import com.demo.admin.UserController;
 import com.demo.blog.BlogController;
 import com.demo.common.model._MappingKit;
@@ -73,6 +78,11 @@ public class DemoConfig extends JFinalConfig {
 		me.add("/class", ClassController.class);
 		me.add("/face", FaceController.class);
 		me.add("/atd", AtdController.class);
+		me.add("/notice", NoticeController.class);
+		me.add("/person", PersonController.class);
+		me.add("/student", StudentController.class);
+		me.add("/teacher", TeacherController.class);
+		me.add("/leave", LeaveController.class);
 	}
 	
 	public void configEngine(Engine me) {

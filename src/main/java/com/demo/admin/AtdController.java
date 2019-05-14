@@ -4,15 +4,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
+import com.demo.common.AuthInterceptor;
 import com.demo.common.model.Attendance;
+import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 
 public class AtdController extends Controller {
+	@Clear(AuthInterceptor.class)
 	public void signin() {
+		String studentId = getPara("studentId");
+		String classId = getPara("classId");
 		Attendance atd = new Attendance();
-		String LastAtdId = atd.findLastAtendanceId("1001").getStr("attendanceId");
-		boolean IsAllow = atd.IsAllow("101").getBoolean("allow");
-		System.out.println(atd.IsAllow("101").getBoolean("allow"));
+		String LastAtdId = atd.findLastAtendanceId(studentId).getStr("attendanceId");
+		boolean IsAllow = atd.IsAllow(classId).getBoolean("allow");
+		System.out.println(IsAllow);
 		if (IsAllow) {
 			HashMap<String, Object> params = new HashMap<>();
 			Date currentTime = new Date();
@@ -33,8 +38,14 @@ public class AtdController extends Controller {
 		int res = atd.startAtendance("101","5");
 		renderJson("res",res);
 	}
-	public void find() {
-		Attendance atd = Attendance.dao.findLastAtendanceId("1001");
+	public void end() {
+		Attendance atd = new Attendance();
+		int res = atd.startAtendance("101","5");
+		renderJson("res",res);
+	}
+	public void list() {
+		String studentId = getPara("studentId");
+		Attendance atd = Attendance.dao.findLastAtendanceId(studentId);
 		renderJson("res",atd);
 	}
 

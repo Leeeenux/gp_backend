@@ -17,14 +17,16 @@ import com.jfinal.kit.Base64Kit;
 public class TokenUtil {
 	static Key KEY = new SecretKeySpec("lee".getBytes(),SignatureAlgorithm.HS512.getJcaName());
 	
-	public String generateToken(String id) {
+	public String generateToken(String id,String role,String classId) {
 		long currentTime = System.currentTimeMillis() + 30 * 60 * 1000;
 		
 		Map<String, Object> stringObjectMap = new HashMap<>();
 		stringObjectMap.put("type", "1");
 		String compactJws = Jwts.builder()
 				.setHeader(stringObjectMap)
-				.claim("id", id) 
+				.claim("id",id)
+				.claim("role",role)
+				.claim("classId",classId)
 				.signWith(SignatureAlgorithm.HS512, KEY)
 				.setExpiration(new Date(currentTime))
 				.compact();
@@ -59,12 +61,36 @@ public class TokenUtil {
 		}
 		
 	}
-	public String tokenParse(String token) {
+	public String tokenParseUsername(String token) {
 //		JwsHeader header = claimsJws.getHeader();
 		try {
 			Jws<Claims> claimsJws = Jwts.parser().setSigningKey(KEY).parseClaimsJws(token);
 			Claims body = claimsJws.getBody();
 			return body.get("id", String.class);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
+	}
+	public String tokenParseRole(String token) {
+//		JwsHeader header = claimsJws.getHeader();
+		try {
+			Jws<Claims> claimsJws = Jwts.parser().setSigningKey(KEY).parseClaimsJws(token);
+			Claims body = claimsJws.getBody();
+			return body.get("role", String.class);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
+	}
+	public String tokenParseClass(String token) {
+//		JwsHeader header = claimsJws.getHeader();
+		try {
+			Jws<Claims> claimsJws = Jwts.parser().setSigningKey(KEY).parseClaimsJws(token);
+			Claims body = claimsJws.getBody();
+			return body.get("classId", String.class);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return null;

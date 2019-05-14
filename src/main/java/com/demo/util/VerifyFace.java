@@ -27,7 +27,7 @@ public class VerifyFace
 
             ClientProfile clientProfile = new ClientProfile();
             clientProfile.setHttpProfile(httpProfile);            
-            
+            clientProfile.setSignMethod(ClientProfile.SIGN_TC3_256);
             IaiClient client = new IaiClient(cred, "ap-guangzhou", clientProfile);
             
             HashMap<String, String> params = new HashMap<>();
@@ -58,7 +58,8 @@ public class VerifyFace
             httpProfile.setEndpoint("iai.tencentcloudapi.com");
 
             ClientProfile clientProfile = new ClientProfile();
-            clientProfile.setHttpProfile(httpProfile);            
+            clientProfile.setHttpProfile(httpProfile);
+            clientProfile.setSignMethod(ClientProfile.SIGN_TC3_256);
             
             IaiClient client = new IaiClient(cred, "ap-guangzhou", clientProfile);
             
@@ -100,6 +101,7 @@ public class VerifyFace
 
             ClientProfile clientProfile = new ClientProfile();
             clientProfile.setHttpProfile(httpProfile);            
+            clientProfile.setSignMethod(ClientProfile.SIGN_TC3_256);//TC3-HMAC-SHA256签名方法 不然会受到请求大小限制
             
             IaiClient client = new IaiClient(cred, "ap-guangzhou", clientProfile);
             HashMap<String, String> params = new HashMap<>();

@@ -16,6 +16,7 @@ import com.demo.util.VerifyFace;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
+import com.jfinal.kit.HttpKit;
 @Clear(AuthInterceptor.class)
 public class FaceController extends Controller {
 	private JSONObject verify(String base64,String studentId) {//人脸识别接口
@@ -23,18 +24,29 @@ public class FaceController extends Controller {
 		JSONObject res = verifyface.verify(base64,studentId);
 		return res;
 	}
+//	public void create() {//人脸录入接口
+//		String base64 = getPara("base64");
+//		String studentId = getPara("studentId");
+//		String groupId = getPara("classId");
+//		String gender = "0";
+//		String personName = getPara("studentName");
+//		System.out.println(studentId);
+//		VerifyFace verifyface = new VerifyFace();
+//		String res = verifyface.createPerson(groupId, personName, studentId, base64, gender);
+//		renderJson(res);
+//	}
 	public void create() {//人脸录入接口
-		String base64 = getPara("base64");
-		String studentId = getPara("studentid");
-		String groupId = getPara("groupid");
-		String gender = getPara("gender");
-		String personName = getPara("name");
-		System.out.println(studentId);
+		String json = HttpKit.readData(getRequest());
+		JSONObject faceInfo = JSONObject.parseObject(json);
+		String base64 = faceInfo.getString("base64");
+		String studentId = faceInfo.getString("studentId");
+		String groupId = faceInfo.getString("classId");
+		String gender = "0";
+		String personName = faceInfo.getString("studentName");
 		VerifyFace verifyface = new VerifyFace();
 		String res = verifyface.createPerson(groupId, personName, studentId, base64, gender);
 		renderJson(res);
 	}
-	
 	@Before(SignInInterceptor.class)
 	public void signin() {
 		String base64 = getPara("base64");

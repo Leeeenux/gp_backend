@@ -18,7 +18,12 @@ public class AuthInterceptor implements Interceptor{
 			System.out.println("OPTIONS拦截");
 			res.put("msg", "hello!");
 			controller.renderJson(res);
-		}else{//OPTIONS不做拦截
+		}
+//		else if (controller.getRequest().getHeader("Referer")!=null) {
+//			System.out.println("来自微信不拦截");
+//			inv.invoke();
+//		}
+		else {//OPTIONS不做拦截
 			String token = inv.getController().getHeader("token");
 			if (token == null) {
 				System.out.println("token不存在");
@@ -29,7 +34,9 @@ public class AuthInterceptor implements Interceptor{
 				res.put("msg", "token不存在");
 				controller.renderJson(res);
 			}else {
-				String username = new TokenUtil().tokenParse(token);
+				String username = new TokenUtil().tokenParseUsername(token);
+				String role = new TokenUtil().tokenParseRole(token);
+				String classId = new TokenUtil().tokenParseClass(token);
 				if (username == null) {
 					inv.invoke();
 					HashMap<String, Object> res = new HashMap<>();
@@ -39,6 +46,8 @@ public class AuthInterceptor implements Interceptor{
 					controller.renderJson(res);
 				}else {
 					controller.setAttr("username", username);//传参给controller
+					controller.setAttr("role", role);
+					controller.setAttr("classId", classId);
 					inv.invoke();
 				}
 			}

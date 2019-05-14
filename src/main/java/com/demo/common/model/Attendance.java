@@ -10,7 +10,27 @@ public class Attendance extends Model<Attendance>{
 	public static final Attendance dao = new Attendance();
 	
 	public List<Attendance> findAllAtendance(String studentId) {
-		return find("SELECT gp_relation.relationId,gp_attendance.attendanceId,gp_student.studentName," + 
+		return find("SELECT gp_relation.relationId,gp_attendance.attendanceId,gp_attendance.createTime,gp_student.studentName," + 
+					"gp_relation.weekday,gp_attendance.signInTime,gp_attendance.signInStatus,gp_subject.subjectName," + 
+				    "gp_arrange.arrangeDesc FROM gp_attendance INNER JOIN gp_relation " + 
+					"ON gp_relation.relationId = gp_attendance.relationId INNER JOIN gp_student " +
+				    "ON gp_attendance.studentId = gp_student.studentId INNER JOIN gp_arrange " +
+					"ON gp_relation.arrangeId = gp_arrange.arrangeId INNER JOIN gp_subject " + 
+				    "ON gp_subject.subjectId = gp_relation.subjectId " + 
+					"WHERE gp_student.studentId = " + studentId);
+	}
+	public List<Attendance> findWeekAtendance(String studentId) {
+		return find("SELECT gp_relation.relationId,gp_attendance.attendanceId,gp_attendance.createTime,gp_student.studentName," + 
+					"gp_relation.weekday,gp_attendance.signInTime,gp_attendance.signInStatus,gp_subject.subjectName," + 
+				    "gp_arrange.arrangeDesc FROM gp_attendance INNER JOIN gp_relation " + 
+					"ON gp_relation.relationId = gp_attendance.relationId INNER JOIN gp_student " +
+				    "ON gp_attendance.studentId = gp_student.studentId INNER JOIN gp_arrange " +
+					"ON gp_relation.arrangeId = gp_arrange.arrangeId INNER JOIN gp_subject " + 
+				    "ON gp_subject.subjectId = gp_relation.subjectId " + 
+					"WHERE gp_student.studentId = " + studentId);
+	}
+	public List<Attendance> findMonthAtendance(String studentId) {
+		return find("SELECT gp_relation.relationId,gp_attendance.attendanceId,gp_attendance.createTime,gp_student.studentName," + 
 					"gp_relation.weekday,gp_attendance.signInTime,gp_attendance.signInStatus,gp_subject.subjectName," + 
 				    "gp_arrange.arrangeDesc FROM gp_attendance INNER JOIN gp_relation " + 
 					"ON gp_relation.relationId = gp_attendance.relationId INNER JOIN gp_student " +
@@ -32,7 +52,7 @@ public class Attendance extends Model<Attendance>{
 	public int Allow(String classId) {
 		return Db.update("UPDATE gp_attendance_allow SET allow=1 WHERE classId = " + classId);
 	}
-	public int NotAllo(String classId) {
+	public int NotAllow(String classId) {
 		return Db.update("UPDATE gp_attendance_allow SET allow=0 WHERE classId = " + classId);
 	}
 	public Attendance IsAllow(String classId) {
