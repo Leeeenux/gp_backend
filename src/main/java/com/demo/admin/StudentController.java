@@ -12,6 +12,7 @@ import com.demo.common.AuthInterceptor;
 import com.demo.common.model.Attendance;
 import com.demo.common.model.Leave;
 import com.demo.common.model.Notice;
+import com.demo.common.model.Relation;
 import com.demo.common.model.Student;
 import com.demo.common.model.User;
 import com.demo.jjwt.TokenUtil;
@@ -65,11 +66,22 @@ public class StudentController extends Controller {
 	}
 	public void record() {
 		String studentId = this.getAttr("username");
+		int days = getParaToInt("days");
 		Attendance atd = new Attendance();
 		HashMap<String, Object> res = new HashMap<>();
+		if (days == 1) {
+			res.put("list",atd.findWeekAtendance(studentId));
+		}else if (days == 2) {
+			res.put("list",atd.findMonthAtendance(studentId));
+		}else if (days == 3) {
+			res.put("list",atd.findAllAtendance(studentId));
+		}
 		res.put("success", true);
-		res.put("list",atd.findAllAtendance(studentId));
 		renderJson(res);
+	}
+	public void signin() {
+		Relation relation = new Relation();
+		renderJson("list",relation.findCurrentSubjectBys("1001"));
 	}
 	public void upload() {
 		String json = HttpKit.readData(getRequest());

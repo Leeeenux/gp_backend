@@ -10,6 +10,7 @@ import com.demo.admin.PersonController;
 import com.demo.admin.StudentController;
 import com.demo.admin.TeacherController;
 import com.demo.admin.UserController;
+import com.demo.admin.WechatController;
 import com.demo.blog.BlogController;
 import com.demo.common.model._MappingKit;
 import com.demo.index.IndexController;
@@ -83,6 +84,7 @@ public class DemoConfig extends JFinalConfig {
 		me.add("/student", StudentController.class);
 		me.add("/teacher", TeacherController.class);
 		me.add("/leave", LeaveController.class);
+		me.add("/wechat", WechatController.class);
 	}
 	
 	public void configEngine(Engine me) {

@@ -18,4 +18,8 @@ public class Student extends Model<Student>{
 	public List<Student> findByNameAndPwd(String username, String password){
 		return find("SELECT * FROM gp_student WHERE studentId = '" + username + "' AND password = '" + password + "'");
 	}
+	public Student findInfo(String StudentId){
+		return findFirst("SELECT gp_student.studentId,gp_student.studentName,gp_student.classId,gp_class.className FROM gp_student "+
+	"INNER JOIN gp_class ON gp_student.classId = gp_class.classId WHERE gp_student.studentId = " + StudentId );
+	}
 }

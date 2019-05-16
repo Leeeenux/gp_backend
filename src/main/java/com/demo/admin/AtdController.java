@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.demo.common.AuthInterceptor;
 import com.demo.common.model.Attendance;
+import com.demo.common.model.Relation;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 
@@ -47,6 +48,11 @@ public class AtdController extends Controller {
 		String studentId = getPara("studentId");
 		Attendance atd = Attendance.dao.findLastAtendanceId(studentId);
 		renderJson("res",atd);
+	}
+	public void current() {
+		String studentId = this.getAttr("username");
+		Relation relation = new Relation();
+		renderJson(relation.findCurrentSubjectByc(studentId));
 	}
 
 }

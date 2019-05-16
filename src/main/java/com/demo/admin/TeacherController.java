@@ -7,6 +7,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.demo.common.AuthInterceptor;
+import com.demo.common.model.Attendance;
+import com.demo.common.model.Relation;
 import com.demo.common.model.Student;
 import com.demo.common.model.Teacher;
 import com.demo.jjwt.TokenUtil;
@@ -36,6 +38,42 @@ public class TeacherController extends Controller {
 	public void list() {
 		List<Teacher> teachers = Teacher.dao.findAllTeacher();
 		renderJson(teachers);
+	}
+	public void current() {
+		String teacherId = this.getAttr("username");
+		Relation relation = new Relation();
+		HashMap<String, Object> res = new HashMap<>();
+		res.put("success", true);
+		res.put("subject", relation.findCurrentSubjectByt(teacherId));
+		renderJson(res);
+	}
+	public void student() {
+		String teacherId = this.getAttr("username");
+		Attendance atd = new Attendance();
+		HashMap<String, Object> res = new HashMap<>();
+		res.put("success", true);
+		res.put("list", atd.findCurrentAtendance("101", "5"));
+		renderJson(res);
+	}
+	public void atdlist() {
+		String classId = getPara("classId");
+		String date = getPara("date");
+		String subjectId = getPara("subjectId");
+		Attendance atd = new Attendance();
+		HashMap<String, Object> res = new HashMap<>();
+		res.put("success", true);
+		res.put("list", atd.findAtdBySubject(classId, date, subjectId));
+		renderJson(res);
+	}
+	
+	public void subjects() {
+		String classId = getPara("classId");
+		String date = getPara("date");
+		Attendance atd = new Attendance();
+		HashMap<String, Object> res = new HashMap<>();
+		res.put("success", true);
+		res.put("list", atd.findSubjects(classId, date));
+		renderJson(res);
 	}
 	public void update() {
 		String json = HttpKit.readData(getRequest());
